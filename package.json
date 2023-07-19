@@ -1,0 +1,20 @@
+{
+  "name": "mac-automation-applescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@jxa/run": "^1.3.6",
+    "applescript": "^1.0.0",
+    "jxa": "^2.0.3",
+    "osascript": "^1.2.0",
+    "run-jxa": "^3.0.0"
+  }
+}
