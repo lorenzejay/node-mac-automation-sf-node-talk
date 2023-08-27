@@ -1,79 +1,49 @@
-import { openDialog } from './openDialog.js'
-import { populateWindowWithTabs } from './getWindowContext.js'
+import '@jxa/global-type'
+import { run } from '@jxa/run'
+import { contextSelections } from './defaultContexts/context.js'
+import { openTerminalInFilepath } from './scripts/openTerminalContext.js'
+import { openApp } from './scripts/openApp.js'
+import { openArcContext } from './scripts/openArcContext.js'
 
-const main = async () => {
-  return
-  // return await run(() => )
+async function getUserSelection(appContexts) {
+  return await run((appContexts) => {
+    const app = Application.currentApplication()
+    app.includeStandardAdditions = true
+    const options = appContexts.map((context) => context.title)
+    const chosenButton = app.chooseFromList(options, {
+      withPrompt: 'Select workspace:',
+      defaultItems: options[0],
+    })
+
+    chosenButton[0] ? chosenButton[0] : null
+    return appContexts.find((context) => context.title == chosenButton)
+  }, appContexts)
 }
 
-const runScript = async () => {
-  const selection = await openDialog()
-  if (selection) {
-    console.log('selection', selection)
-    const tabs = await populateWindowWithTabs(selection.links)
-    console.log('tabs', tabs)
+const automateWorkspace = async () => {
+  try {
+    const selectedWorkspace = await getUserSelection(contextSelections)
+
+    console.log('selectedWorkspace', selectedWorkspace)
+    for (const app of selectedWorkspace.applications) {
+      if (app == 'Terminal') {
+        await openTerminalInFilepath(selectedWorkspace.workspacePaths)
+      }
+
+      if (app == 'Arc') {
+        console.log('triggering arc')
+        await openArcContext({
+          links: selectedWorkspace.links,
+          spaceName: selectedWorkspace.spaceName,
+        })
+      }
+
+      // openApp(app)
+    }
+  } catch (error) {
+    console.log('error', error)
+    throw new Error(error?.message)
   }
 }
-// set the run script as a cron schedule
-// cron.schedule('10 9 * * 1-7', runScript)
 
-// test
-runScript()
-
-// export async function runMorningAutomation(appsToOpen) {
-//   for (const app of appsToOpen) {
-//     try {
-//       const username = await currentUserName();
-//       console.log("username", username);
-//       await run(`
-//         const app = Application('${app}');
-//         app.activate();
-//       `);
-//       // await openApp(app);
-//       // getCurrentDesktopId().then((desktopId) => {
-//       //   console.log(`Current Desktop ID: ${desktopId}`);
-//       // });
-//     } catch (error) {
-//       console.error(`Error opening ${app}: ${error}`);
-//     }
-//   }
-// }
-
-// const currentUserName = () => {
-//   return run(() => {
-//     const sys = Application("System Events");
-//     return sys.currentUser().name();
-//   });
-// };
-
-// async function getCurrentDesktopId() {
-//   // return await run(() => {
-//   //   const systemEvents = Application("System Events");
-//   //   // systemEvents.currentUser();
-//   //   console.log("systemEvents.currentUser()", systemEvents.currentUser());
-//   // });
-//   const currentDesktopId = await run(`
-//     const systemEvents = Application('System Events');
-//     const currentDesktop = systemEvents.currentUser().currentDesktop();
-//     return currentDesktop.id();
-//   `);
-//   // console.log("currentDesktopId", currentDesktopId);
-//   return currentDesktopId;
-// }
-
-// async function openApp(app) {
-//   return await run((app) => {
-//     console.log("app", app);
-//     const appToOpen = Application(app);
-//     appToOpen.activate();
-//     // console.log("desktopId", desktopId);
-//     // console.log("appToOpen.windows[0]", appToOpen.windows[0]);
-//     // appToOpen.windows[0].visible = true;
-//   }, app);
-// }
-
-// const appsToOpen = ["Safari", "Spotify", "zoom.us"];
-
-// runMorningAutomation(appsToOpen).catch((error) => {
-//   console.error("An error occurred:", error);
-// });
+await automateWorkspace()
