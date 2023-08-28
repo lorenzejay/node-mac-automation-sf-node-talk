@@ -28,17 +28,19 @@ const automateWorkspace = async () => {
     for (const app of selectedWorkspace.applications) {
       if (app == 'Terminal') {
         await openTerminalInFilepath(selectedWorkspace.workspacePaths)
+        continue
       }
 
       if (app == 'Arc') {
         console.log('triggering arc')
         await openArcContext({
-          links: selectedWorkspace.links,
+          links: selectedWorkspace.browserLinks,
           spaceName: selectedWorkspace.spaceName,
         })
+        continue
       }
 
-      // openApp(app)
+      await openApp(app)
     }
   } catch (error) {
     console.log('error', error)
@@ -46,4 +48,4 @@ const automateWorkspace = async () => {
   }
 }
 
-await automateWorkspace()
+automateWorkspace()

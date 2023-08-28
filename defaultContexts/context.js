@@ -1,6 +1,6 @@
 // links
 const statefulLinks = [
-  'https://github.com/stateful',
+  'https://github.com/stateful/runme.dev',
   'https://runme.dev',
   'https://stateful.com',
 ]
@@ -13,9 +13,7 @@ const unifaiContext = {
   id: 1,
   title: 'Unifai',
   description: 'Full Stack',
-  links: unifaiLinks,
   applications: [
-    // 'Visual Studio Code', // assumed defalt code editor is this
     'Insomnia',
     'DBeaver',
     'Docker Desktop',
@@ -32,7 +30,7 @@ const unifaiContext = {
     'https://github.com/Unifai-us/surveygen-frontend',
     'https://linear.app/leadwithunifai/team/UM/all',
   ],
-  terminalCommands: [],
+  applicationCommands: ['npm run start:dev', 'npm run start'],
   spaceName: 'unifai',
   spaceId: 'unifai',
 }
@@ -41,21 +39,34 @@ const statefulContext = {
   id: 2,
   title: 'Stateful',
   description: 'runme.dev - next app',
-  links: statefulLinks,
-  applications: ['Terminal', 'Arc'],
   workspacePaths: ['Users/lorenzejay/workspace/stateful/runme.dev'],
-  terminalCommands: [],
+  applicationCommands: ['npm run dev'],
   spaceName: 'Stateful',
+  browserLinks: statefulLinks,
+}
+const workspaceContainers = {
+  id: 3,
+  title: 'Workspace Containers',
+  description: 'Workspace automation',
+  applications: [
+    'Terminal',
+    'Arc',
+    'Script Editor',
+    'Obsidian',
+    'LaunchControl',
+  ],
+  workspacePaths: ['/Users/lorenzejay/workspace/mac-automation-applescript/'],
+  applicationCommands: [],
+  spaceName: 'Mac Container Workspaces',
   browserLinks: [''],
 }
 
-const contextSelections = [unifaiContext, statefulContext]
+const contextSelections = [unifaiContext, statefulContext, workspaceContainers]
 
 export {
   unifaiContext,
   statefulLinks,
   unifaiLinks,
   contextSelections,
-  // unifaiSurveyGenContext,
   modeOptions,
 }
