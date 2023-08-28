@@ -1,8 +1,9 @@
 import '@jxa/global-type'
 import { run } from '@jxa/run'
 
-export const openTerminalInFilepath = async (filePaths) => {
-  return await run((filePaths) => {
+export const openTerminalInFilepath = async (context) => {
+  return await run((context) => {
+    const { filePaths, commands } = context
     const terminal = Application('Terminal')
     terminal.includeStandardAdditions = true
 
@@ -28,7 +29,11 @@ export const openTerminalInFilepath = async (filePaths) => {
         in: window,
         administratorPrivileges: false,
       })
+      terminal.doScript(`${commands[i]}`, {
+        in: window,
+        administratorPrivileges: false,
+      })
     }
     terminal.activate() // puts it in front
-  }, filePaths)
+  }, context)
 }

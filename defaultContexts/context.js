@@ -30,7 +30,7 @@ const unifaiContext = {
     'https://github.com/Unifai-us/surveygen-frontend',
     'https://linear.app/leadwithunifai/team/UM/all',
   ],
-  applicationCommands: ['npm run start:dev', 'npm run start'],
+  workspaceCommands: ['npm run start:dev', 'npm run start'],
   spaceName: 'unifai',
   spaceId: 'unifai',
 }
@@ -40,7 +40,8 @@ const statefulContext = {
   title: 'Stateful',
   description: 'runme.dev - next app',
   workspacePaths: ['Users/lorenzejay/workspace/stateful/runme.dev'],
-  applicationCommands: ['npm run dev'],
+  workspaceCommands: ['npm run dev'],
+  applications: ['Terminal', 'Arc'],
   spaceName: 'Stateful',
   browserLinks: statefulLinks,
 }
@@ -56,7 +57,7 @@ const workspaceContainers = {
     'LaunchControl',
   ],
   workspacePaths: ['/Users/lorenzejay/workspace/mac-automation-applescript/'],
-  applicationCommands: [],
+  workspaceCommands: [''],
   spaceName: 'Mac Container Workspaces',
   browserLinks: [''],
 }
