@@ -18,3 +18,7 @@ Features
 4. Populate common workspace browser tabs to browser
 
 - not needed for ARC
+
+## Resources:
+
+[applescript docs](https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/reference/ASLR_error_codes.html#//apple_ref/doc/uid/TP40000983-CH220-SW5)

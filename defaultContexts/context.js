@@ -51,10 +51,10 @@ const workspaceContainers = {
   description: 'Workspace automation',
   applications: [
     'Obsidian',
-    'Terminal',
-    'Arc',
     'Script Editor',
     'LaunchControl',
+    'Terminal',
+    'Arc',
   ],
   workspacePaths: ['/Users/lorenzejay/workspace/mac-automation-applescript/'],
   workspaceCommands: [''],

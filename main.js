@@ -28,28 +28,26 @@ const automateWorkspace = async () => {
     for (let app of selectedWorkspace.applications) {
       if (app == 'Docker') {
         await openDocker('Docker')
-        console.log('opening docker')
-      }
-      if (app == 'Terminal') {
-        console.log('opening terminal')
+        // console.log('opening docker')
+      } else if (app == 'Terminal') {
+        // console.log('opening terminal')
         await openTerminalInFilepath({
           filePaths: selectedWorkspace.workspacePaths,
           commands: selectedWorkspace.workspaceCommands,
         })
       } else if (app == 'Arc') {
-        console.log('opening arc')
+        // console.log('opening arc')
         await openArcContext({
           links: selectedWorkspace.browserLinks,
           spaceName: selectedWorkspace.spaceName,
         })
       } else {
-        console.log('not arc or terminal')
-        return await openApp(app)
+        // console.log('not arc or terminal')
+        await openApp(app)
       }
     }
-    return selectedWorkspace
   } catch (error) {
-    throw new Error(error?.message)
+    throw new Error(error?.message || 'Something went wrong')
   }
 }
 

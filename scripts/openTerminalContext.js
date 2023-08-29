@@ -7,10 +7,11 @@ export const openTerminalInFilepath = async (context) => {
     const terminal = Application('Terminal')
     terminal.includeStandardAdditions = true
 
-    terminal.doScript() // opens
+    terminal.launch()
+    // terminal.doScript() // guarantees window.length should be at least one?
+    delay(0.5)
 
     const window = terminal.windows[terminal.windows.length - 1]
-
     if (!window) {
       console.log('no window')
     }
@@ -21,6 +22,7 @@ export const openTerminalInFilepath = async (context) => {
 
     for (let i = 0; i < filePaths.length; i++) {
       terminal.doScript() // opens a new window
+
       terminal.doScript(`cd "/${filePaths[i]}"`, {
         in: window,
         administratorPrivileges: false,
@@ -37,7 +39,5 @@ export const openTerminalInFilepath = async (context) => {
         administratorPrivileges: false,
       })
     }
-    terminal.activate() // puts it in front
-    delay(0.5)
   }, context)
 }

@@ -5,7 +5,7 @@ export const openArcContext = async (context) => {
   return await run((context) => {
     const arc = Application('Arc')
     arc.includeStandardAdditions = true
-    arc.activate()
+    arc.launch()
 
     if (!arc) throw new Error('Arc doesnt exist')
     const windowsAmount = arc.windows.length
@@ -33,7 +33,7 @@ export const openArcContext = async (context) => {
         for (let l = 0; l < context.links.length; l++) {
           const link = context.links[l]
           currentSpace.tabs[l].url = link
-          console.log(link + ' added')
+          // console.log(link + ' added')
           if (context.links[l + 1] !== undefined) {
             const newTab = arc.Tab()
             newTab.url = context.links[l + 1]
@@ -44,5 +44,6 @@ export const openArcContext = async (context) => {
       }
     }
     delay(0.3)
+    arc.activate()
   }, context)
 }
