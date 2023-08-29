@@ -4,6 +4,7 @@ import { contextSelections } from './defaultContexts/context.js'
 import { openTerminalInFilepath } from './scripts/openTerminalContext.js'
 import { openApp } from './scripts/openApp.js'
 import { openArcContext } from './scripts/openArcContext.js'
+import { openDocker } from './scripts/openDocker.js'
 
 async function getUserSelection(appContexts) {
   return await run((appContexts) => {
@@ -23,28 +24,30 @@ async function getUserSelection(appContexts) {
 const automateWorkspace = async () => {
   try {
     const selectedWorkspace = await getUserSelection(contextSelections)
-
-    console.log('selectedWorkspace', selectedWorkspace)
-    for (const app of selectedWorkspace.applications) {
+    if (!selectedWorkspace) return 'no selected apps'
+    for (let app of selectedWorkspace.applications) {
+      if (app == 'Docker') {
+        await openDocker('Docker')
+        console.log('opening docker')
+      }
       if (app == 'Terminal') {
-        openTerminalInFilepath({
+        console.log('opening terminal')
+        await openTerminalInFilepath({
           filePaths: selectedWorkspace.workspacePaths,
           commands: selectedWorkspace.workspaceCommands,
         })
-        continue
-      }
-
-      if (app == 'Arc') {
-        openArcContext({
+      } else if (app == 'Arc') {
+        console.log('opening arc')
+        await openArcContext({
           links: selectedWorkspace.browserLinks,
           spaceName: selectedWorkspace.spaceName,
         })
-        continue
+      } else {
+        console.log('not arc or terminal')
+        return await openApp(app)
       }
-
-      openApp(app)
-      continue
     }
+    return selectedWorkspace
   } catch (error) {
     throw new Error(error?.message)
   }

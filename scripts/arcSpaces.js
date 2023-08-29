@@ -52,8 +52,8 @@ export const openArcAtSpecificSpace = async () => {
 }
 
 // test
-const call = async () => {
-  await openArcAtSpecificSpace()
-}
+// const call = async () => {
+//   await openArcAtSpecificSpace()
+// }
 
-call()
+// call()

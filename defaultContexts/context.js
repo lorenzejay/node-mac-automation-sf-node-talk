@@ -50,10 +50,10 @@ const workspaceContainers = {
   title: 'Workspace Containers',
   description: 'Workspace automation',
   applications: [
+    'Obsidian',
     'Terminal',
     'Arc',
     'Script Editor',
-    'Obsidian',
     'LaunchControl',
   ],
   workspacePaths: ['/Users/lorenzejay/workspace/mac-automation-applescript/'],

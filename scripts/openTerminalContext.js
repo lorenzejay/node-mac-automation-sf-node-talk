@@ -25,15 +25,19 @@ export const openTerminalInFilepath = async (context) => {
         in: window,
         administratorPrivileges: false,
       })
+      delay(0.1)
+
       terminal.doScript(`code .`, {
         in: window,
         administratorPrivileges: false,
       })
+      delay(0.5)
       terminal.doScript(`${commands[i]}`, {
         in: window,
         administratorPrivileges: false,
       })
     }
     terminal.activate() // puts it in front
+    delay(0.5)
   }, context)
 }

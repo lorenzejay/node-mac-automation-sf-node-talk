@@ -6,7 +6,6 @@ export const openArcContext = async (context) => {
     const arc = Application('Arc')
     arc.includeStandardAdditions = true
     arc.activate()
-    delay(0.3)
 
     if (!arc) throw new Error('Arc doesnt exist')
     const windowsAmount = arc.windows.length
@@ -44,5 +43,6 @@ export const openArcContext = async (context) => {
         currentSpace.focus()
       }
     }
+    delay(0.3)
   }, context)
 }
