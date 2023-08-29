@@ -7,7 +7,7 @@ export const openTerminalInFilepath = async (context) => {
     const terminal = Application('Terminal')
     terminal.includeStandardAdditions = true
 
-    // terminal.doScript() // opens
+    terminal.doScript() // opens
 
     const window = terminal.windows[terminal.windows.length - 1]
 

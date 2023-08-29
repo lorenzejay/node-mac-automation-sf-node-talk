@@ -14,12 +14,12 @@ const unifaiContext = {
   title: 'Unifai',
   description: 'Full Stack',
   applications: [
+    'Terminal',
+    'Arc',
     'Insomnia',
     'DBeaver',
     'Docker Desktop',
-    'Terminal',
     'Postgres',
-    'Arc',
   ],
   workspacePaths: [
     'Users/lorenzejay/Documents/Uplift Digital Solutions/clients/unifai/Unifai-surveygen',

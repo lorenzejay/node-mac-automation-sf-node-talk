@@ -3,16 +3,33 @@ import { run } from '@jxa/run'
 
 const showBgWindows = async () => {
   return await run(() => {
-    const listNames = Application('System Events').applicationProcesses.where({
-      backgroundOnly: false,
-    }).windows
+    // const bgWindowsNames = Application('System Events')
+    //   .processes.where({
+    //     backgroundOnly: false,
+    //   })
+    //   .windows.name()
+    const bgWindows = Application('System Events').windows()
 
-    for (const list of listNames) {
-      console.log('list', list.name())
+    // const listNames = Application('System Events').processes.windows.name()
+    // const listIds = Application('System Events').processes.windows.id()
+
+    for (let i = 0; i < bgWindows.length; i++) {
+      const windowName = bgWindows[i].name()
+      console.log(`app - `, windowName)
+      ret
+      // const windowName = bgWindowsNames[i]
+      if (windowName.includes('Spotify')) {
+        console.log('close window - ', windowName)
+        console
+          .log(
+            'app to close ',
+            bgWindows[i].process.where({
+              acceptsHighLevelEvents: true,
+            })
+          )
+          .name()
+      }
     }
-
-    // console.log('listNames', listNames)
-    console.log('listIds', listNames)
   })
 }
 showBgWindows()
