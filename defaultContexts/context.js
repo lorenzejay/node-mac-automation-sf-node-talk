@@ -33,6 +33,7 @@ const unifaiContext = {
   workspaceCommands: ['npm run start:dev', 'npm run start'],
   spaceName: 'unifai',
   spaceId: 'unifai',
+  usesDocker: true,
 }
 
 const statefulContext = {
@@ -44,6 +45,7 @@ const statefulContext = {
   applications: ['Terminal', 'Arc'],
   spaceName: 'Stateful',
   browserLinks: statefulLinks,
+  usesDocker: false,
 }
 const workspaceContainers = {
   id: 3,
@@ -60,6 +62,7 @@ const workspaceContainers = {
   workspaceCommands: [''],
   spaceName: 'Mac Container Workspaces',
   browserLinks: [''],
+  usesDocker: false,
 }
 
 const contextSelections = [unifaiContext, statefulContext, workspaceContainers]

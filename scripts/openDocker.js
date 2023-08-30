@@ -4,9 +4,16 @@ import { run } from '@jxa/run'
 // return new ope app windowId
 export const openDocker = async () => {
   return await run(() => {
-    const application = Application('Docker')
-    // application.includeStandardAdditions = true
-    application.activate()
-    delay(1)
+    try {
+      const docker = Application('Docker')
+      if (docker.running()) {
+        docker.activate()
+      } else {
+        docker.launch()
+        docker.activate()
+      }
+    } catch (error) {
+      console.log('docker not running...')
+    }
   })
 }

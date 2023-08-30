@@ -9,16 +9,16 @@ export const openApp = async (app) => {
     try {
       const application = Application(app)
       application.includeStandardAdditions = true
-      delay(0.5)
+      delay(0.3)
       if (application.running()) {
         application.activate()
       } else {
         application.launch()
-        delay(0.5)
+        delay(0.3)
         application.activate()
       }
     } catch (error) {
-      console.log(error.message)
+      console.log(`${app} not running...`)
     }
   }, app)
 }
